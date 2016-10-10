@@ -16,25 +16,33 @@ standard input), but *you must test any code that uses them*.
 
 Make a branch from 001-starting-to-implement-deck and:
 
+- Specifications must name and test all behaviors
 - Generate enumerations for Rank and Suit.
+    - Define the value of Rank as the max scoring value of that rank, e.g. Ace = 11
 - Generate a Card abstraction that holds rank/suit
     - Cards must have a functional equals(), hashCode(), and toString() (with spec)
 - Generate a Deck abstraction
     - Methods: 
+        - `size()` indicates how many cards remain
+        - `size()` indicates how many cards remain
         - `dealCard()` removes the "top card" and returns it
         - Constructor generates a deck in rank/suit order
         - `shuffle()` mutates the deck in place to randomize the location of cards
             - The shuffle algorithm requires some advanced thinking: how do you easily 
               prove your logic is correct without basing the tests on what you are specifically doing?
-    - Specifications must name and test all behaviors
   
 ### Part 2 -- I/O, injection, and integration/manual testing
 
 Use your result from part 1 to continue:
 
-- Create an I/O layer for asking questions and showing output: ConsoleIO
+- Create an I/O layer for obtaining console input and showing output: ConsoleIO
     - Must be injectable
-    - Make manual integration tests (-Duser-intervention trick)
+    - Make manual integration tests (e.g., -Duser-intervention trick)
+- Create a `String Prompt.prompt(question, legalResponsePattern, defaultReturnValue)` function:
+    - Empty response (or IO exceptions) must return the default
+    - Re-asks question until legal response (if resp is non-empty)
+    - Trims the user input (removes whitespace from endpoints)
+    - Must be UNIT testable (not integration tested)
 
 ### Part 3 -- Round out algorithms
 
